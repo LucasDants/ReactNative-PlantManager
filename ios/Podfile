@@ -16,6 +16,10 @@ target 'PlantManager' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
   target 'PlantManagerTests' do
     inherit! :complete
     # Pods for testing
