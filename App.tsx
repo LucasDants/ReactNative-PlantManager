@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
-import {Text} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import Routes from './src/routes';
 
 const App = () => {
   useEffect(() => {
-    console.log('entrou');
     SplashScreen.hide();
   }, []);
 
-  return <Text>aa</Text>;
+  return <Routes />;
 };
 
 export default App;
