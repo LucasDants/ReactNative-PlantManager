@@ -7,7 +7,7 @@ export function Load() {
   return (
     <View style={styles.container}>
       <LottieView
-        source={loadAnimation}
+        source={loadAnimation} //Animação escolhida
         autoPlay
         loop
         style={styles.animation}

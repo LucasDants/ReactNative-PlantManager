@@ -9,26 +9,16 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import server from '../services/server';
 import {Load} from '../components/Load';
+import {useNavigation} from '@react-navigation/core';
+import {PlantProps} from '../libs/storage';
 
 interface EnvironmentProps {
   key: string;
   title: string;
 }
 
-interface PlantProps {
-  id: number;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  };
-}
-
 export function PlantSelect() {
+  const navigation = useNavigation();
   const environments = server.plants_environments as EnvironmentProps[];
   const plants = server.plants as PlantProps[];
   const [environmentSelected, setEnvironmentSelected] = useState('all');
@@ -39,7 +29,10 @@ export function PlantSelect() {
   // const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
   // const [page, setPage] = useState(1);
   // const [loadingMore, setLoadingMore] = useState(false);
-  // const [loadedAll, setLoadedAll] = useState(false);
+
+  function handlePlantSelect(plant: PlantProps) {
+    navigation.navigate('PlantSave', {plant});
+  }
 
   function handleEnvironmentSelected(environment: string) {
     setEnvironmentSelected(environment);
@@ -105,16 +98,14 @@ export function PlantSelect() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Header
-          userName={'Lucas'}
-          userImage={'https://avatars.githubusercontent.com/u/55062200?v=4'}
-        />
+        <Header />
         <Text style={styles.title}>Em qual ambiente</Text>
         <Text style={styles.subtitle}>você quer colocar sua planta?</Text>
       </View>
       <View>
         <FlatList
           data={environments}
+          keyExtractor={item => String(item.key)}
           renderItem={({item}) => (
             <EnvironmentButton
               title={item.title}
@@ -131,8 +122,13 @@ export function PlantSelect() {
       <View style={styles.plants}>
         <FlatList
           data={filteredPlants}
+          keyExtractor={item => String(item.id)}
           renderItem={({item}) => (
-            <PlantCardPrimary data={item} key={item.name} />
+            <PlantCardPrimary
+              data={item}
+              key={item.name}
+              onPress={() => handlePlantSelect(item)}
+            />
           )}
           showsVerticalScrollIndicator={false}
           numColumns={2}
