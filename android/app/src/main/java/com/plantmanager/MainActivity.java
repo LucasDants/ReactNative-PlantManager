@@ -13,11 +13,10 @@ public class MainActivity extends ReactActivity {
    * rendering of the component.
    */
 
-
-  @Override
-  protected String getMainComponentName() {
-    return "PlantManager";
-  }
+    @Override
+    protected String getMainComponentName() {
+      return "PlantManager";
+    }
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
