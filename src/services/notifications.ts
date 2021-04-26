@@ -60,7 +60,7 @@ export function Notification({content}: NotificationProps) {
     number: 10, // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
     repeatType: content.repeatType, // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
     date: new Date(
-      Date.now() + content.seconds < 60 ? 60 * 1000 : content.seconds * 1000,
+      Date.now() + (content.seconds < 60 ? 60 * 1000 : content.seconds * 1000),
     ),
     allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
   });
